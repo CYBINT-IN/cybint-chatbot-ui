@@ -1,0 +1,18 @@
+.transitions-header {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 10px 0;
+  max-width: 70vw;
+  flex-wrap: wrap;
+}
+.transitions-body {
+  padding: 30px;
+  width: 61vw;
+  background: var(--tertiary);
+  display: none;
+}
+
+.transitions-body.active {
+  display: block;
+}

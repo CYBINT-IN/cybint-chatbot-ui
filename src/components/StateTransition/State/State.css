@@ -1,0 +1,20 @@
+.state {
+  margin: 10px;
+  padding-left: 8px;
+  border-left-width: 8px;
+  border-left-style: solid;
+  border-left-color: var(--tertiary);
+
+  border-radius: 6px;
+}
+
+.state.active {
+  border-left-color: var(--primary);
+}
+.state .body {
+  display: none;
+}
+
+.state.active .body {
+  display: block;
+}

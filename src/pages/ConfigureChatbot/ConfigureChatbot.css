@@ -1,0 +1,21 @@
+.config-chatbot-container {
+  background: var(--secondary);
+  margin: auto;
+  display: block;
+  min-height: 80vh;
+  width: 75vw;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 1vw 6vw;
+}
+
+.step-container {
+  min-height: 58vh;
+  width: 100%;
+  display: block;
+  /* background: var(--tertiary); */
+  align-self: flex-start;
+  margin-bottom: 10px;
+}

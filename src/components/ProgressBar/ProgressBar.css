@@ -1,0 +1,25 @@
+.progressbar-wrapper {
+  width: 180px;
+  position: relative;
+  display: flex;
+  margin: 5px;
+  padding: 10px;
+  flex-direction: column;
+}
+.progressbar-label {
+  font-size: 18px;
+  font-weight: bolder;
+  color: var(--primary);
+}
+.progressbar-container {
+  margin-top: 10px;
+  height: 14px;
+  width: 100%;
+  border-radius: 6px;
+  background: var(--tertiary);
+}
+.progressbar-filler {
+  height: 14px;
+  border-radius: 6px;
+  background: var(--primary);
+}
