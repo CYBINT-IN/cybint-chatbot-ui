@@ -1,0 +1,18 @@
+.column .btn {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-grow: 1;
+}
+
+.column .btn.dark {
+  text-align: center;
+  font-weight: medium;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+}

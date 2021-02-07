@@ -1,0 +1,37 @@
+.form-input {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+.form-input label {
+  font-weight: bold;
+  font-size: 16px;
+  padding: 5px 0px;
+  width: 100%;
+}
+.form-input input {
+  display: block;
+  height: 47px;
+  border: none;
+  border-radius: 6px;
+  padding: 15px;
+  width: 100%;
+}
+
+.form-input.light input {
+  background-color: var(--secondary);
+  color: var(--primary);
+}
+.form-input.light label {
+  color: var(--primary);
+}
+
+.form-input.dark input {
+  background-color: var(--grey-2);
+  color: var(--primary);
+}
+.form-input.dark label {
+  color: var(--primary);
+}

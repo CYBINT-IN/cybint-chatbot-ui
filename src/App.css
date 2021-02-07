@@ -1,7 +1,18 @@
 .App {
   background: var(--primary);
-  min-width: 100vw;
+  width: 100vw;
   min-height: 100vh;
   padding-top: 9vh;
   overflow-x: hidden;
+}
+
+.App img.robo {
+  position: absolute;
+  right: 10vw;
+  height: 28vh;
+  margin-top: -24vh;
+}
+.step-container h1.header-label {
+  font-size: 36px;
+  font-weight: bold;
 }

@@ -1,0 +1,12 @@
+.general-ques-body .form .submit {
+  align-self: center;
+  justify-self: center;
+  margin: 10px auto;
+  display: block;
+}
+.general-ques-body .form {
+  width: 23vw;
+}
+.general-ques-body .form input {
+  margin-bottom: 20px;
+}

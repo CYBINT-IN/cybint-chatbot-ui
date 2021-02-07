@@ -1,15 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
 body {
   margin: 0;
-  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif; */
-  font-family: "Open Sans", sans-serif;
+  font-family: "Circular Std", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --primary: #1c2235;
   --secondary: #ffffff;
   --tertiary: #d1d5dd;
+  --grey-2: rgba(34, 56, 136, 0.1);
+  background: var(--primary);
+  overflow-x: hidden;
 }
 
 * {
@@ -17,52 +17,22 @@ body {
   margin: 0;
   padding: 0;
 }
-
-.dark-btn {
+.btn {
+  padding: 10px;
+  width: 160px;
+  height: 42px;
+  border: none;
+  font-size: 16px;
+  font-weight: medium;
+  border-radius: 6px;
+  /* margin: 10px; */
+}
+.btn.dark {
   background: var(--primary);
   color: var(--secondary);
-  /* margin: 10px; */
-  padding: 10px;
-  width: 160px;
-  height: 42px;
-  border: none;
-  font-size: 16px;
-  font-weight: medium;
-  border-radius: 6px;
 }
 
-.light-btn {
+.btn.light {
   background: var(--tertiary);
   color: var(--primary);
-  /* margin: 10px; */
-  padding: 10px;
-  width: 160px;
-  height: 42px;
-  border: none;
-  font-size: 16px;
-  font-weight: medium;
-  border-radius: 6px;
-}
-.form-light-input {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-}
-.form-light-input label {
-  color: var(--primary);
-  font-weight: bold;
-  font-size: 16px;
-  padding: 5px 0px;
-}
-.form-light-input input {
-  display: block;
-  background-color: var(--secondary);
-  height: 47px;
-  width: 120%;
-  border: none;
-  border-radius: 6px;
-  padding: 15px;
 }

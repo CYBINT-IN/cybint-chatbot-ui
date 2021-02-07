@@ -1,0 +1,18 @@
+.example {
+  font-size: 16px;
+  justify-self: center;
+  padding: 0;
+  width: 24vw;
+  margin: 0 auto;
+}
+
+.example h1 {
+  font-size: 16px;
+  font-weight: bold;
+}
+/* Inline #6 | http://localhost:3000/?message=&keywords=&end=&spare-content=&intent=&transition-state=&type= */
+
+.example p {
+  /* justify-content: center; */
+  margin-top: 10px;
+}

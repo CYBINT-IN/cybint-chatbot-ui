@@ -9,8 +9,7 @@ const dummyTransitions = [
   "4d8211e9-daaf-497c-a2e5-4c49e03e8825",
 ];
 
-
-const TransitionRow = ({stateId}) => {
+const TransitionRow = ({ stateId }) => {
   const [
     transitionIds,
     setTransitionIds,
@@ -20,10 +19,10 @@ const TransitionRow = ({stateId}) => {
     dummyTransitions,
     "c822cbf5-0017-4f51-9545-bd7600e179c9"
   );
-    const addDummyTransition = () => {
-        const newId = genereateDummyID()
-        setTransitionIds([...transitionIds, newId])
-    }
+  const addDummyTransition = () => {
+    const newId = genereateDummyID();
+    setTransitionIds([...transitionIds, newId]);
+  };
   return (
     <>
       <div className="transitions-header">
@@ -38,11 +37,15 @@ const TransitionRow = ({stateId}) => {
             />
           );
         })}
-        <button className="dark-btn" onClick={addDummyTransition}>Add Transition</button>
+        <button className="dark btn" onClick={addDummyTransition}>
+          Add Transition
+        </button>
       </div>
-      <div className={"transitions-body " + (currentlyOpen ? "active": "")}>
-        {currentlyOpen ? <TransitionForm stateId={stateId} transitionId={currentlyOpen} /> : null}
-    </div>
+      <div className={"transitions-body " + (currentlyOpen ? "active" : "")}>
+        {currentlyOpen ? (
+          <TransitionForm stateId={stateId} transitionId={currentlyOpen} />
+        ) : null}
+      </div>
     </>
   );
 };

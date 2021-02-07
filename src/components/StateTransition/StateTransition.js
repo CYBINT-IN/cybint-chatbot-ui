@@ -22,7 +22,7 @@ const StateTransition = () => {
     <>
       <div className="states-header">
         <h1>States/Transition</h1>
-        <button className="dark-btn" onClick={addDummyState}>
+        <button className="dark btn" onClick={addDummyState}>
           Add State
         </button>
       </div>

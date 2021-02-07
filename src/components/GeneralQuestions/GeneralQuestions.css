@@ -1,0 +1,10 @@
+.general-ques-body {
+  display: grid;
+  grid-template-areas:
+    "form example"
+    "list list";
+  width: 100%;
+}
+.general-ques-body .list {
+  margin-top: 8em;
+}
