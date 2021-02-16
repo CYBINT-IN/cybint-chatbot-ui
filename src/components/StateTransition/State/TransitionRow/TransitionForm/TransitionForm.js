@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextInput from "../../../../FormInputs/TextInput/TextInput";
 import "./TransitionForm.css";
 
@@ -12,9 +12,8 @@ const initiailData = {
   type: "",
 };
 
-const TransitionForm = ({ stateId, transitionId }) => {
-  const [data, setData] = useState(initiailData);
-
+const TransitionForm = ({ state, transitionIndex }) => {
+  const [data, setData] = useState(state.transitions[transitionIndex]);
   return (
     <form className="transition-form" onSubmit={() => console.log("Submitted")}>
       <TextInput label="Message" name="message" />
