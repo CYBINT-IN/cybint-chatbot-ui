@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState, createContext } from "react";
+import getKeywords from "../utils/getKeywords";
 import StateRequests from "../utils/StateRequests";
 import TransitionRequests from "../utils/TransitionRequests";
 
@@ -59,10 +60,10 @@ export function StateTransProvider({ children }) {
       newState.transitions[transIndex] = trans;
 
       // repalce the newly modified state
-      const newStateTransData = { ...stateTransData };
+      const newStateTransData = [...stateTransData];
       newStateTransData[stateIndex] = newState;
       // update in backend
-      const data = await TransitionRequests.update(trans._id, newState);
+      const data = await TransitionRequests.update(newState);
       if (data) {
         setStateTransData(newStateTransData);
         return { success: true, stateIndex, transIndex };
@@ -97,12 +98,12 @@ export function StateTransProvider({ children }) {
   const addState = async () => {
     const state = await StateRequests.create();
     if (state) {
-      const i = getStateNum(state._id) - 1;
-      if (i < 0) {
-        const newStateTransData = { ...stateTransData };
-        newStateTransData.push(state);
-        setStateTransData(newStateTransData);
-      }
+      console.log(stateTransData);
+      const newStateTransData = [...stateTransData];
+      console.log(newStateTransData);
+      newStateTransData.push(state);
+      console.log(newStateTransData);
+      setStateTransData(newStateTransData);
     }
   };
   // Function to traverse the graph over the network
@@ -114,26 +115,27 @@ export function StateTransProvider({ children }) {
     const temp = [];
     if (rootStateId) {
       const currState = await StateRequests.fetchById(rootStateId);
-      console.log(currState);
       if (currState) {
         temp.push(currState);
       }
-      console.log(temp);
       // loop through the array
-      for (let i = 0; i < temp.length; i++) {
+      for (let s of temp) {
         // for each "State" Object
         // map it's transitions array  from array of ids to objects
         // console.log(temp, i);
-        for (let j = 0; j < temp[i].transitions.length; j++) {
-          const transData = temp[i].transitions[j];
+        for (let j = 0; j < s.transitions.length; j++) {
+          const transData = s.transitions[j];
           // try to find state with id same as transData.state
           // if not found, get and push inside the array
           if (
-            transData.end &&
+            !transData.end &&
+            transData.state &&
+            transData.state.length > 0 &&
             temp.findIndex((s) => s._id === transData.state) === -1
           ) {
             const stateData = await StateRequests.fetchById(transData.state);
             temp.push(stateData);
+            console.log(temp);
           }
         }
       }

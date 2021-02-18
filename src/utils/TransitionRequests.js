@@ -36,15 +36,15 @@ export const create = async (state_id, transition) => {
   }
 };
 
-export const update = async (trans_id, state) => {
+export const update = async (state) => {
   try {
-    if (trans_id && state) {
-      const res = await fetch(`${transURL}/update?id=${trans_id}`, {
+    if (state) {
+      const res = await fetch(`${transURL}/update?id=${state._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ state }),
+        body: JSON.stringify({ state: { ...state, _id: undefined } }),
       });
       const data = await res.json();
       if (!data.error && res.ok) {
@@ -53,7 +53,7 @@ export const update = async (trans_id, state) => {
       console.log(data);
       return null;
     } else {
-      throw Error("Transition ID and Transition required");
+      throw Error("State ID and State required");
     }
   } catch (error) {
     console.log(error);

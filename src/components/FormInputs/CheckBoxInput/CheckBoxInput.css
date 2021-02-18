@@ -1,0 +1,13 @@
+.checkbox-input {
+  width: 100%;
+}
+
+.checkbox-input .btn {
+  width: 100%;
+}
+
+.btn.inactive {
+  background: var(--secondary);
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}

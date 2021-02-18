@@ -8,7 +8,6 @@ export const fetchById = async (id) => {
     if (!data.error && res.ok) {
       return data.state;
     }
-    console.log(data);
     return null;
   } catch (error) {
     console.log(error);
@@ -33,7 +32,7 @@ export const create = async (transitions = []) => {
       const result = await fetchById(data.insertId);
       console.log(result);
       if (result) {
-        return result.state;
+        return result;
       }
     }
     return null;

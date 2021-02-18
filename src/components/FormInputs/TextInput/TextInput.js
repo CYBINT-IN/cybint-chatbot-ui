@@ -6,6 +6,7 @@ const TextInput = ({
   inputClassName,
   name,
   dark,
+  value,
   ...rest
 }) => {
   return (
@@ -16,6 +17,7 @@ const TextInput = ({
           className={inputClassName}
           name={name}
           type="text"
+          value={value || ""}
           {...rest}
         ></input>
       </label>
