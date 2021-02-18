@@ -86,7 +86,7 @@ export function StateTransProvider({ children }) {
         // if not found, push
         newState.transitions.push(t);
         // shalow copy current data
-        const newStateTransData = { ...stateTransData };
+        const newStateTransData = [...stateTransData];
         // replace the state
         newStateTransData[stateIndex] = newState;
         setStateTransData(newStateTransData);
