@@ -17,13 +17,10 @@ const initiailData = {
 };
 
 const TransitionForm = ({ state, transitionIndex }) => {
-  const { stateTransData, updateTransInState } = useStateTrans();
+  const { stateTransData, updateTransInState, getStateNum } = useStateTrans();
   const [data, setData] = useState({});
   const [stateOptions, setStateOptions] = useState();
-  // const [transitionIndex, setTransitionIndex] = useState(transIndex);
-  // useEffect(() => {
-  //   setTransitionIndex(transIndex);
-  // }, [transIndex]);
+  const [isEnd, setIsEnd] = useState(false);
   useEffect(() => {
     const transition = { ...state.transitions[transitionIndex] };
     if (transition.keywords) {
@@ -43,6 +40,13 @@ const TransitionForm = ({ state, transitionIndex }) => {
       setStateOptions(opts);
     }
   }, [stateTransData]);
+
+  useEffect(() => {
+    if (stateTransData && getStateNum(state._id) === stateTransData.length) {
+      setIsEnd(true);
+    }
+  }, [stateTransData, state, transitionIndex]);
+
   useEffect(() => {
     setData((data) => {
       if (data && data.state === "None") {
@@ -84,6 +88,7 @@ const TransitionForm = ({ state, transitionIndex }) => {
       <CheckBoxInput
         label="End"
         name="end"
+        disabled={isEnd}
         onChange={(end) => setData({ ...data, end })}
         value={data && data.end}
       />
@@ -108,6 +113,7 @@ const TransitionForm = ({ state, transitionIndex }) => {
         name="transition-state"
         options={stateOptions}
         value={data && data.state}
+        disabled={isEnd}
         onChange={(e) => {
           setData((data) => ({ ...data, state: e.target.value }));
         }}
