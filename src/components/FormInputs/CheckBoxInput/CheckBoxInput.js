@@ -9,14 +9,15 @@ const CheckBoxInput = ({
   name,
   ...rest
 }) => {
-  const [state, setState] = useState(false);
+  const [state, setState] = useState(value);
   useEffect(() => {
     if (onChange) {
       onChange(state);
     }
   }, [state]);
   useEffect(() => {
-    setState(value);
+    if (value) setState(true);
+    else setState(false);
   }, []);
   return (
     <input

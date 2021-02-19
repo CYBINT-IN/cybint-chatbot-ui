@@ -29,8 +29,9 @@ const TransitionForm = ({ state, transitionIndex }) => {
     if (transition.keywords) {
       console.log(transition.keywords);
       transition.keywords = transition.keywords.join(", ");
-      setData(transition);
     }
+    if (!transition.end) transition.end = false;
+    setData(transition);
   }, [transitionIndex]);
 
   useEffect(() => {

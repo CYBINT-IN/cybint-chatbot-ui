@@ -11,7 +11,7 @@ export function useStateTrans() {
 const emptyTransition = {
   statement: "",
   keywords: [],
-  end: "",
+  end: false,
   spareContent: "",
   intent: "",
   state: "",
