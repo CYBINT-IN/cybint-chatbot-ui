@@ -18,7 +18,7 @@ const initiailData = {
 
 const TransitionForm = ({ state, transitionIndex }) => {
   const { stateTransData, updateTransInState } = useStateTrans();
-  const [data, setData] = useState();
+  const [data, setData] = useState({});
   const [stateOptions, setStateOptions] = useState();
   // const [transitionIndex, setTransitionIndex] = useState(transIndex);
   // useEffect(() => {
@@ -31,6 +31,7 @@ const TransitionForm = ({ state, transitionIndex }) => {
       transition.keywords = transition.keywords.join(", ");
     }
     if (!transition.end) transition.end = false;
+    if (!transition.state) transition.end = true;
     setData(transition);
   }, [transitionIndex]);
 
@@ -42,7 +43,14 @@ const TransitionForm = ({ state, transitionIndex }) => {
       setStateOptions(opts);
     }
   }, [stateTransData]);
-
+  useEffect(() => {
+    setData((data) => {
+      if (data && data.state === "None") {
+        return { ...data, end: true };
+      }
+      return data;
+    });
+  }, [data.state]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const submittedData = { ...data };
@@ -51,6 +59,7 @@ const TransitionForm = ({ state, transitionIndex }) => {
       delete submittedData.state;
     }
     console.log(submittedData);
+    if (!submittedData.state) submittedData.end = true;
     await updateTransInState(state._id, submittedData, transitionIndex);
   };
 
@@ -75,23 +84,23 @@ const TransitionForm = ({ state, transitionIndex }) => {
       <CheckBoxInput
         label="End"
         name="end"
-        onChange={(val) => setData({ ...data, end: val })}
+        onChange={(end) => setData({ ...data, end })}
         value={data && data.end}
       />
       <TextInput
         label="Spare Content"
         name="spare-content"
-        onChange={(e) =>
-          setData((data) => ({ ...data, spareContent: e.target.value }))
-        }
+        onChange={(e) => {
+          setData((data) => ({ ...data, spareContent: e.target.value }));
+        }}
         value={data && data.spareContent}
       />
       <TextInput
         label="Intent"
         name="intent"
-        onChange={(e) =>
-          setData((data) => ({ ...data, intent: e.target.value }))
-        }
+        onChange={(e) => {
+          setData((data) => ({ ...data, intent: e.target.value }));
+        }}
         value={data && data.intent}
       />
       <SelectInput

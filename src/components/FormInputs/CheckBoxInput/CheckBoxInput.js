@@ -16,9 +16,8 @@ const CheckBoxInput = ({
     }
   }, [state]);
   useEffect(() => {
-    if (value) setState(true);
-    else setState(false);
-  }, []);
+    setState(value);
+  }, [value, setState]);
   return (
     <input
       value={label + (state ? ": true" : ": false")}
