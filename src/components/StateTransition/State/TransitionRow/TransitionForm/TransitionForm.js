@@ -59,11 +59,18 @@ const TransitionForm = ({ state, transitionIndex }) => {
     e.preventDefault();
     const submittedData = { ...data };
     submittedData.keywords = getKeywords(submittedData.keywords);
-    if (submittedData.state === "None") {
+    if (
+      (submittedData.state === "None",
+      submittedData.state && submittedData.state.length === 0)
+    ) {
       delete submittedData.state;
     }
     console.log(submittedData);
-    if (!submittedData.state) submittedData.end = true;
+    if (
+      !submittedData.state ||
+      (submittedData.state && submittedData.state.length === 0)
+    )
+      submittedData.end = true;
     await updateTransInState(state._id, submittedData, transitionIndex);
   };
 

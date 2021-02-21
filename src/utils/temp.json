@@ -1,0 +1,15 @@
+{
+  "state": {
+    "transitions": [
+      {
+        "statement": "Do you order cakes and pastries frequently?",
+        "keywords": [""],
+        "spareContent": "I was asking if you order cakes/pastries frequently?",
+        "intent": "",
+        "state": "602f4d9df6d42f1f4cc61544",
+        "type": "",
+        "end": false
+      }
+    ]
+  }
+}
