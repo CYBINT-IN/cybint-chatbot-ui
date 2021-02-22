@@ -36,3 +36,7 @@ body {
   background: var(--tertiary);
   color: var(--primary);
 }
+
+.btn.right-margin {
+  margin-right: 20px;
+}
