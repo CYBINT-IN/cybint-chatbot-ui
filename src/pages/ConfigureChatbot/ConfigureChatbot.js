@@ -2,6 +2,7 @@ import { useState } from "react";
 import GeneralQuestions from "../../components/GeneralQuestions/GeneralQuestions";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import StateTransition from "../../components/StateTransition/StateTransition";
+import useStepState from "../../hooks/useStepState";
 import "./ConfigureChatbot.css";
 // const steps = [
 //   "States/Transitions",
@@ -12,7 +13,7 @@ import "./ConfigureChatbot.css";
 // ];
 
 const ConfigureChatbot = () => {
-  const [currentStepNo, setCurrentStepNo] = useState(1);
+  const [currentStepNo, setCurrentStepNo] = useStepState(1, 5, 1);
 
   return (
     <div className="config-chatbot-container">
@@ -22,12 +23,25 @@ const ConfigureChatbot = () => {
         {currentStepNo == 1 ? <StateTransition /> : null}
         {currentStepNo == 2 ? <GeneralQuestions /> : null}
       </div>
-      <button
-        className="dark btn"
-        onClick={() => setCurrentStepNo((curr) => curr + 1)}
-      >
-        Proceed
-      </button>
+
+      <div className='step-button-group'>
+        {currentStepNo > 1 ? (
+          <button
+            className="light btn right-margin"
+            onClick={() => setCurrentStepNo(currentStepNo - 1)}
+          >
+            Back
+          </button>
+        ) : (null)}
+        {currentStepNo < 5 ? (
+          <button
+            className="dark btn"
+            onClick={() => setCurrentStepNo(currentStepNo + 1)}
+          >
+            Proceed
+          </button>
+        ) : (null)}
+      </div>
     </div>
   );
 };
