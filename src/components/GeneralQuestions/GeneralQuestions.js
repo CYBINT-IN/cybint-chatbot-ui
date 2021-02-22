@@ -1,58 +1,44 @@
-import "./GeneralQuestions.css";
-import QuestionForm from "./QuestionForm/QuestionForm";
-import Example from "../Example/Example";
-import List from "../List/List";
-const initialData = [
-  {
-    name: "Questions",
-    values: [
-      "What number of flavours do you offer ",
-      "What time does the shop open",
-      "What number of flavours do you offer",
-      "What time does the shop open",
-      "What number of flavours do you offer ",
-      "What time does the shop open",
-      "What number of flavours do you offer",
-      "What time does the shop open",
-    ],
-  },
-  {
-    name: "Answer",
-    values: [
-      "We have variety of flavours ranging from",
-      "We are open from 1 AM to 7PM",
-      "We have variety of flavours ranging from",
-      "We are open from 1 AM to 7PM",
-      "We have variety of flavours ranging from",
-      "We are open from 1 AM to 7PM",
-      "We have variety of flavours ranging from",
-      "We are open from 1 AM to 7PM",
-    ],
-  },
-  {
-    name: "Keywords",
-    values: [
-      '"What", "Flavours", "Number',
-      '"What", "Timings", "Open',
-      '"What", "Flavours", "Number',
-      '"What", "Timings", "Open',
-      '"What", "Flavours", "Number',
-      '"What", "Timings", "Open',
-      '"What", "Flavours", "Number',
-      '"What", "Timings", "Open',
-    ],
-  },
-];
+import { useEffect, useState } from 'react';
+import './GeneralQuestions.css';
+import QuestionForm from './QuestionForm/QuestionForm';
+import Example from '../Example/Example';
+import List from '../List/List';
+import { readAllQa } from '../../utils/qa';
+
 const GeneralQuestions = () => {
+  const [questions, setQuestions] = useState([]);
+
+  const sanitizeQuestions = async () => {
+    const response = await readAllQa();
+    let questions = [];
+    let answers = [];
+    let keywords = [];
+    response.forEach((item) => {
+      questions.push(item.statement);
+      answers.push(item.answer);
+      keywords.push("'" + item.keywords.join("', '") + "'");
+    });
+    const mouldedData = [
+      { name: 'Question', values: questions },
+      { name: 'Answer', values: answers },
+      { name: 'Keywords', values: keywords },
+    ];
+    setQuestions(mouldedData);
+  };
+
+  useEffect(() => {
+    sanitizeQuestions();
+  }, []);
+
   return (
     <>
-      <div className="general-ques-header">
-        <h1 className="header-label">General Question</h1>
+      <div className='general-ques-header'>
+        <h1 className='header-label'>General Question</h1>
       </div>
-      <div className="general-ques-body">
+      <div className='general-ques-body'>
         <QuestionForm />
         <Example />
-        <List columns={initialData} />
+        <List columns={questions} />
       </div>
     </>
   );
