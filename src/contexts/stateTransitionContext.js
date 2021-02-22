@@ -71,6 +71,39 @@ export function StateTransProvider({ children }) {
       return { success: false };
     }
   };
+  // Function to replace a transition in a state by STATE ID and TRANS Object if trans id found else return false
+  const deleteTransInState = async (state_id, transIndex) => {
+    if (stateTransData) {
+      const stateIndex = getStateNum(state_id) - 1;
+      if (stateIndex < 0) {
+        console.log(`State ${state_id} Not Found`);
+        return { success: false };
+      }
+      // shalow copy all props of state
+      let newState = { ...stateTransData[stateIndex] };
+      // copy each of thre transitions into the new state
+      if (!newState.transitions) {
+        return { success: false };
+      }
+      newState.transitions = newState.transitions.map((t) => ({ ...t }));
+      // check if it's not found
+      if (transIndex < 0 || transIndex > newState.transitions.length) {
+        return { success: false, stateIndex };
+      }
+      newState.transitions.splice(transIndex, 1);
+      // repalce the newly modified state
+      const newStateTransData = [...stateTransData];
+      newStateTransData[stateIndex] = newState;
+      // update in backend
+      const data = await TransitionRequests.remove(newState);
+      if (data) {
+        setStateTransData(newStateTransData);
+        return { success: true, stateIndex, transIndex };
+      }
+      return { success: false };
+    }
+  };
+
   //Function to append a new transition to a state if it doesn't already exist
   const addTransInState = async (state_id, t = emptyTransition) => {
     const stateIndex = getStateNum(state_id) - 1;
@@ -103,6 +136,16 @@ export function StateTransProvider({ children }) {
       console.log(newStateTransData);
       newStateTransData.push(state);
       console.log(newStateTransData);
+      setStateTransData(newStateTransData);
+    }
+  };
+
+  const deleteState = async (state_id) => {
+    const data = await StateRequests.remove(state_id);
+    if (data) {
+      const newStateTransData = stateTransData.filter(
+        (s) => s._id !== state_id
+      );
       setStateTransData(newStateTransData);
     }
   };
@@ -164,6 +207,8 @@ export function StateTransProvider({ children }) {
     triggerSTRefresh,
     addState,
     getStateById,
+    deleteTransInState,
+    deleteState,
   };
   return (
     <StateTransContext.Provider value={val}>

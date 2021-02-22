@@ -52,7 +52,11 @@ const TransitionRow = ({ state }) => {
         }
       >
         {typeof currentlyOpen !== "undefined" ? (
-          <TransitionForm state={state} transitionIndex={currentlyOpen} />
+          <TransitionForm
+            state={state}
+            closeFunc={() => handleTransitionClick(currentlyOpen)}
+            transitionIndex={currentlyOpen}
+          />
         ) : null}
       </div>
     </>

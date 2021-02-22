@@ -8,6 +8,19 @@
   border-radius: 6px;
 }
 
+.state .button-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.state .delete-btn {
+  color: rgb(233, 92, 92);
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+}
+
 .state.active {
   border-left-color: var(--primary);
 }

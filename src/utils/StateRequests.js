@@ -40,7 +40,27 @@ export const create = async (transitions = []) => {
     console.log(error);
   }
 };
+
+export const remove = async (state_id) => {
+  try {
+    const res = await fetch(`${stateURL}/delete?id=${state_id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    if (!data.error && res.ok) {
+      return data;
+    }
+    return null;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export default {
   fetchById,
   create,
+  remove,
 };

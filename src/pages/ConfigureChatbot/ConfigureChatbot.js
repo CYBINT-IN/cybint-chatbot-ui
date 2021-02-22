@@ -4,6 +4,8 @@ import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import StateTransition from "../../components/StateTransition/StateTransition";
 import useStepState from "../../hooks/useStepState";
 import "./ConfigureChatbot.css";
+import { ToastsContainer, ToastsStore } from "react-toasts";
+
 // const steps = [
 //   "States/Transitions",
 //   "General Questions",
@@ -24,7 +26,7 @@ const ConfigureChatbot = () => {
         {currentStepNo == 2 ? <GeneralQuestions /> : null}
       </div>
 
-      <div className='step-button-group'>
+      <div className="step-button-group">
         {currentStepNo > 1 ? (
           <button
             className="light btn right-margin"
@@ -32,7 +34,7 @@ const ConfigureChatbot = () => {
           >
             Back
           </button>
-        ) : (null)}
+        ) : null}
         {currentStepNo < 5 ? (
           <button
             className="dark btn"
@@ -40,8 +42,9 @@ const ConfigureChatbot = () => {
           >
             Proceed
           </button>
-        ) : (null)}
+        ) : null}
       </div>
+      <ToastsContainer store={ToastsStore} />
     </div>
   );
 };

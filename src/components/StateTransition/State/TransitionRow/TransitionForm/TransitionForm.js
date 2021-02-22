@@ -5,6 +5,7 @@ import SelectInput from "../../../../FormInputs/SelectInput/SelectInput";
 import TextInput from "../../../../FormInputs/TextInput/TextInput";
 import { useStateTrans } from "../../../../../contexts/stateTransitionContext";
 import "./TransitionForm.css";
+import { ToastsStore } from "react-toasts";
 
 const initiailData = {
   message: "",
@@ -16,8 +17,13 @@ const initiailData = {
   type: "",
 };
 
-const TransitionForm = ({ state, transitionIndex }) => {
-  const { stateTransData, updateTransInState, getStateNum } = useStateTrans();
+const TransitionForm = ({ state, transitionIndex, closeFunc }) => {
+  const {
+    stateTransData,
+    updateTransInState,
+    getStateNum,
+    deleteTransInState,
+  } = useStateTrans();
   const [data, setData] = useState({});
   const [stateOptions, setStateOptions] = useState();
   const [isEnd, setIsEnd] = useState(false);
@@ -55,6 +61,7 @@ const TransitionForm = ({ state, transitionIndex }) => {
       return data;
     });
   }, [data.state]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const submittedData = { ...data };
@@ -72,6 +79,8 @@ const TransitionForm = ({ state, transitionIndex }) => {
     )
       submittedData.end = true;
     await updateTransInState(state._id, submittedData, transitionIndex);
+    ToastsStore.success("Saved Your Changes");
+    closeFunc();
   };
 
   return (
@@ -95,7 +104,7 @@ const TransitionForm = ({ state, transitionIndex }) => {
       <CheckBoxInput
         label="End"
         name="end"
-        disabled={isEnd}
+        disabled={true}
         onChange={(end) => setData({ ...data, end })}
         value={data && data.end}
       />
@@ -131,9 +140,21 @@ const TransitionForm = ({ state, transitionIndex }) => {
         value={data && data.type}
         onChange={(e) => setData((data) => ({ ...data, type: e.target.value }))}
       />
-      <button type="submit" className="dark btn">
-        ADD
-      </button>
+      <div className="btn-container">
+        <button type="submit" className="dark btn">
+          ADD
+        </button>
+        <input
+          type="button"
+          onClick={async () => {
+            await deleteTransInState(state._id, transitionIndex);
+            ToastsStore.error("Deleted Transition Successfully");
+            closeFunc();
+          }}
+          className="delete btn"
+          value="Delete"
+        ></input>
+      </div>
     </form>
   );
 };

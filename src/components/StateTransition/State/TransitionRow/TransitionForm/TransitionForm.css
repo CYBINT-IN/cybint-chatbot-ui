@@ -14,3 +14,17 @@
 
 .transitions-body {
 }
+
+.transition-form .btn-container {
+  display: flex;
+}
+.transition-form .btn-container button,
+.transition-form .btn-container input {
+  width: 100px;
+  margin-left: 10px;
+}
+
+.transition-form .btn-container input.delete {
+  background-color: rgb(233, 122, 122);
+  color: white;
+}
