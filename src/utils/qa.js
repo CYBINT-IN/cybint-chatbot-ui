@@ -1,54 +1,52 @@
 const stateURL = `${process.env.REACT_APP_ROOT_URL}/qa`;
 
 export const createQA = async (qa) => {
-  const body = { qa }
+  const body = { qa };
   try {
-
     const response = await window.fetch(`${stateURL}/create`, {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {
-        'content-type': 'application/json'
-      }
-    })
+        'content-type': 'application/json',
+      },
+    });
 
     if (response.status === 201) {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
   } catch (error) {
-    console.error('Error in creating qa', { qa, body })
-    return false
+    console.error('Error in creating qa', { qa, body });
+    return false;
   }
-}
+};
 
 export const readAllQa = async () => {
   try {
-    const response = await window.fetch(`${stateURL}/readAll`)
+    const response = await window.fetch(`${stateURL}/readAll`);
     if (response.status === 200) {
-      const body = await response.json()
-      return body.qas ?? []
+      const body = await response.json();
+      return body.qas ?? [];
     } else {
-      return []
+      return [];
     }
   } catch (error) {
-    console.error('Error in fetching all data')
-    return []
+    console.error('Error in fetching all data');
+    return [];
   }
-}
+};
 
 export const deleteQa = async (id) => {
   try {
-    const response = await window.fetch(`${stateURL}/delete?id=${id}`)
+    const response = await window.fetch(`${stateURL}/delete?id=${id}`);
     if (response.status === 200) {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
   } catch (error) {
-    console.error('Error in deleting QA', { id })
-    return true
+    console.error('Error in deleting QA', { id });
+    return true;
   }
-}
-
+};

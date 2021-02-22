@@ -9,6 +9,7 @@ const GeneralQuestions = () => {
   const [questions, setQuestions] = useState([]);
 
   const sanitizeQuestions = async () => {
+    console.log('Reaching');
     const response = await readAllQa();
     let questions = [];
     let answers = [];
@@ -36,7 +37,7 @@ const GeneralQuestions = () => {
         <h1 className='header-label'>General Question</h1>
       </div>
       <div className='general-ques-body'>
-        <QuestionForm />
+        <QuestionForm fetchQues={sanitizeQuestions} />
         <Example />
         <List columns={questions} />
       </div>
