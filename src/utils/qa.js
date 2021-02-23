@@ -11,7 +11,7 @@ export const createQA = async (qa) => {
       },
     });
 
-    if (response.status === 201) {
+    if (response.status === 201 || response.status === 200) {
       return true;
     } else {
       return false;
