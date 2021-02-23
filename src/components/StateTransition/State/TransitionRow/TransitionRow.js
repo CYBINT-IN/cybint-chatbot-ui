@@ -1,5 +1,5 @@
 import "./TransitionRow.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Transition from "./Transition/Transition";
 import useSingleOpenByIds from "../../../../hooks/useSingleOpenByIds";
 import TransitionForm from "./TransitionForm/TransitionForm";
@@ -7,9 +7,11 @@ import genereateDummyID from "../../../../utils/generateDummyID";
 import { useStateTrans } from "../../../../contexts/stateTransitionContext";
 
 const TransitionRow = ({ state }) => {
-  const { addTransInState } = useStateTrans();
+  const { addTransInState, stateTransData } = useStateTrans();
   const [currentlyOpen, setCurrentlyOpen] = useState();
-
+  useEffect(() => {
+    handleTransitionClick(undefined);
+  }, [stateTransData.length]);
   const handleTransitionClick = (key) => {
     // If open then close
     // console.log("current ", currentlyOpen);
