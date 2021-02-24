@@ -39,7 +39,9 @@ export const readAllQa = async () => {
 
 export const deleteQa = async (id) => {
   try {
-    const response = await window.fetch(`${stateURL}/delete?id=${id}`);
+    const response = await window.fetch(`${stateURL}/delete?id=${id}`, {
+      method: 'POST',
+    });
     if (response.status === 200) {
       return true;
     } else {

@@ -3,21 +3,26 @@ import './GeneralQuestions.css';
 import QuestionForm from './QuestionForm/QuestionForm';
 import Example from '../Example/Example';
 import List from '../List/List';
-import { readAllQa } from '../../utils/qa';
+import { deleteQa, readAllQa } from '../../utils/qa';
+import Trash from '../../assets/trash.svg';
 
 const GeneralQuestions = () => {
   const [questions, setQuestions] = useState([]);
+  const [active, setActive] = useState('');
 
   const sanitizeQuestions = async () => {
-    console.log('Reaching');
     const response = await readAllQa();
     let questions = [];
     let answers = [];
     let keywords = [];
+
     response.forEach((item) => {
-      questions.push(item.statement);
-      answers.push(item.answer);
-      keywords.push("'" + item.keywords.join("', '") + "'");
+      questions.push({ data: item.statement, id: item._id });
+      answers.push({ data: item.answer, id: item._id });
+      keywords.push({
+        data: "'" + item.keywords.join("', '") + "'",
+        id: item._id,
+      });
     });
     const mouldedData = [
       { name: 'Question', values: questions },
@@ -39,7 +44,18 @@ const GeneralQuestions = () => {
       <div className='general-ques-body'>
         <QuestionForm fetchQues={sanitizeQuestions} />
         <Example />
-        <List columns={questions} />
+        <List columns={questions} active={active} setActive={setActive} />
+        <img
+          src={Trash}
+          alt='Delete'
+          width='30'
+          className='delete'
+          style={active !== '' ? {} : { display: 'none' }}
+          onClick={() => {
+            deleteQa(active);
+            sanitizeQuestions();
+          }}
+        />
       </div>
     </>
   );

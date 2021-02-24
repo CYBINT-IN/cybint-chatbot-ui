@@ -1,12 +1,19 @@
-import Column from "./Column/Column";
-import "./List.css";
+import Column from './Column/Column';
+import './List.css';
 
-const List = ({ columns, gridArea = "list" }) => {
+const List = ({ columns, gridArea = 'list', active, setActive }) => {
   return (
-    <div className="list" style={{ gridArea }}>
+    <div className='list' style={{ gridArea }}>
       {columns &&
         columns.map((col) => {
-          return <Column name={col.name} values={col.values} />;
+          return (
+            <Column
+              name={col.name}
+              values={col.values}
+              active={active}
+              setActive={setActive}
+            />
+          );
         })}
     </div>
   );
