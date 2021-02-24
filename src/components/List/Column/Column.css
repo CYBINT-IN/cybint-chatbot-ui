@@ -4,11 +4,13 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   flex-grow: 1;
+  cursor: pointer;
 }
 
 .column .btn.dark {
   text-align: center;
   font-weight: medium;
+  cursor: default;
 }
 .column {
   display: flex;

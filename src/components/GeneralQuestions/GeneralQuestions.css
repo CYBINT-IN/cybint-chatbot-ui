@@ -1,10 +1,19 @@
 .general-ques-body {
   display: grid;
   grid-template-areas:
-    "form example"
-    "list list";
+    'form example'
+    'list list';
   width: 100%;
+  position: relative;
 }
+
 .general-ques-body .list {
   margin-top: 8em;
+}
+
+.delete {
+  position: absolute;
+  bottom: -2.5rem;
+  left: 0;
+  cursor: pointer;
 }

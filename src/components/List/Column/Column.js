@@ -1,12 +1,20 @@
-import "./Column.css";
+import './Column.css';
 
-const Column = ({ name, values, gridArea = "column" }) => {
+const Column = ({ name, values, gridArea = 'column', active, setActive }) => {
   return (
-    <div className="column" style={{ gridArea }}>
-      <div className="btn dark">{name}</div>
+    <div className='column' style={{ gridArea }}>
+      <div className='btn dark'>{name}</div>
       {values &&
-        values.map((val) => {
-          return <div className="btn light">{val}</div>;
+        values.map(({ data, id }) => {
+          return (
+            <div
+              className='btn light'
+              style={active === id ? { backgroundColor: '#82858b' } : {}}
+              onClick={() => setActive(id)}
+            >
+              {data}
+            </div>
+          );
         })}
     </div>
   );
