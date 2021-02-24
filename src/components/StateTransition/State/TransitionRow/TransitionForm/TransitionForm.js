@@ -104,7 +104,7 @@ const TransitionForm = ({ state, transitionIndex, closeFunc }) => {
       <CheckBoxInput
         label="End"
         name="end"
-        disabled={true}
+        disabled={false}
         onChange={(end) => setData({ ...data, end })}
         value={data && data.end}
       />
